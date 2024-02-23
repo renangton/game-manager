@@ -4,7 +4,7 @@
 | 論理名         | 物理名    | 型       | 桁数 | Nullable | その他          |
 |--------------|---------|---------|-----|---------|----------------|
 | ゲームID     | id      | char    | 26  | NO      | PK 採番はULID   |
-| ゲーム名     | game_name | VARCHAR |     | NO      |                |
+| ゲーム名     | game_name | VARCHAR | 20  | NO      |                |
 | 対応ジャンルID | genre_id | char    | 26  | NO      | FK             |
 | 価格         | price   | int     | 10  | NO      |                |
 ### ジャンルテーブル
