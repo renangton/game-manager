@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gamemanager.infra.platform.PlatformMapper">
+
+    <resultMap type="com.gamemanager.domain.platform.Platform" id="platform">
+        <id property="PlatformId" column="id"/>
+        <result property="name" column="platform_name"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="createdBy" column="created_by"/>
+        <result property="updatedAt" column="updated_at"/>
+        <result property="updatedBy" column="updated_by"/>
+        <result property="Version" column="version"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="platform">
+        SELECT *
+        FROM platforms
+    </select>
+
+<!--    <select id="selectById" resultMap="platform">-->
+<!--        SELECT *-->
+<!--        FROM platforms-->
+<!--        WHERE id = #{platformId}-->
+<!--    </select>-->
+</mapper>

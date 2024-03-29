@@ -61,17 +61,18 @@ CREATE TABLE platforms
 	created_by VARCHAR(20) NOT NULL,
 	updated_at DATETIME NOT NULL,
 	updated_by VARCHAR(20) NOT NULL,
+	version INT UNSIGNED NOT NULL,
 	PRIMARY KEY(id)
 );
 
-INSERT INTO platforms (id, platform_name, created_at, created_by, updated_at, updated_by) VALUES ('01F9SNHD3GY8E0RNHDY1T5PMTV', 'PS4', '2024-03-08 12:30:30', 'API', '2024-03-08 12:30:30', 'API');
-INSERT INTO platforms (id, platform_name, created_at, created_by, updated_at, updated_by) VALUES ('01F9SNHD3H63J5NW9KYK56QZ0Y', 'PS5', '2024-03-08 12:30:30', 'API', '2024-03-08 12:30:30', 'API');
-INSERT INTO platforms (id, platform_name, created_at, created_by, updated_at, updated_by) VALUES ('01F9SNHD3HRY9YDTEA9D66WJ7D', 'Switch', '2024-03-08 12:30:30', 'API', '2024-03-08 12:30:30', 'API');
-INSERT INTO platforms (id, platform_name, created_at, created_by, updated_at, updated_by) VALUES ('01F9SNHD3J0YSE5FHXG0BYTF05', 'Steam', '2024-03-08 12:30:30', 'API', '2024-03-08 12:30:30', 'API');
-INSERT INTO platforms (id, platform_name, created_at, created_by, updated_at, updated_by) VALUES ('01F9SNHD3JB8SSTWXXNDD9A2NT', 'Origin', '2024-03-08 12:30:30', 'API', '2024-03-08 12:30:30', 'API');
-INSERT INTO platforms (id, platform_name, created_at, created_by, updated_at, updated_by) VALUES ('01F9SNHD3KPCB6E1DNWNN22Q54', 'UBI', '2024-03-08 12:30:30', 'API', '2024-03-08 12:30:30', 'API');
-INSERT INTO platforms (id, platform_name, created_at, created_by, updated_at, updated_by) VALUES ('01F9SNHD3LH2QFBZ0DG34G9H0T', 'iOS', '2024-03-08 12:30:30', 'API', '2024-03-08 12:30:30', 'API');
-INSERT INTO platforms (id, platform_name, created_at, created_by, updated_at, updated_by) VALUES ('01F9SNHD3NRYA9HWEXR7Q44MP1', 'Battlestate Games', '2024-03-08 12:30:30', 'API', '2024-03-08 12:30:30', 'API');
+INSERT INTO platforms (id, platform_name, created_at, created_by, updated_at, updated_by, version) VALUES ('01F9SNHD3GY8E0RNHDY1T5PMTV', 'PS4', '2024-03-08 12:30:30', 'API', '2024-03-08 12:30:30', 'API', 0);
+INSERT INTO platforms (id, platform_name, created_at, created_by, updated_at, updated_by, version) VALUES ('01F9SNHD3H63J5NW9KYK56QZ0Y', 'PS5', '2024-03-08 12:30:30', 'API', '2024-03-08 12:30:30', 'API', 0);
+INSERT INTO platforms (id, platform_name, created_at, created_by, updated_at, updated_by, version) VALUES ('01F9SNHD3HRY9YDTEA9D66WJ7D', 'Switch', '2024-03-08 12:30:30', 'API', '2024-03-08 12:30:30', 'API', 0);
+INSERT INTO platforms (id, platform_name, created_at, created_by, updated_at, updated_by, version) VALUES ('01F9SNHD3J0YSE5FHXG0BYTF05', 'Steam', '2024-03-08 12:30:30', 'API', '2024-03-08 12:30:30', 'API', 0);
+INSERT INTO platforms (id, platform_name, created_at, created_by, updated_at, updated_by, version) VALUES ('01F9SNHD3JB8SSTWXXNDD9A2NT', 'Origin', '2024-03-08 12:30:30', 'API', '2024-03-08 12:30:30', 'API', 0);
+INSERT INTO platforms (id, platform_name, created_at, created_by, updated_at, updated_by, version) VALUES ('01F9SNHD3KPCB6E1DNWNN22Q54', 'UBI', '2024-03-08 12:30:30', 'API', '2024-03-08 12:30:30', 'API', 0);
+INSERT INTO platforms (id, platform_name, created_at, created_by, updated_at, updated_by, version) VALUES ('01F9SNHD3LH2QFBZ0DG34G9H0T', 'iOS', '2024-03-08 12:30:30', 'API', '2024-03-08 12:30:30', 'API', 0);
+INSERT INTO platforms (id, platform_name, created_at, created_by, updated_at, updated_by, version) VALUES ('01F9SNHD3NRYA9HWEXR7Q44MP1', 'Battlestate Games', '2024-03-08 12:30:30', 'API', '2024-03-08 12:30:30', 'API', 0);
 
 DROP TABLE IF EXISTS games_platforms;
 

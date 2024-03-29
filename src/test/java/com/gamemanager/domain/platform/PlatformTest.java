@@ -35,7 +35,7 @@ class PlatformTest {
     @Test
     public void プラットフォームを再構築すると正しい属性のインスタンスが作成されること() {
         // when
-        PlatformId platformId = new PlatformId();
+        PlatformId platformId = new PlatformId("01F9SNHD3GY8E0RNHDY1T5PMTV");
         String name = "PS5";
         String createdBy = "API";
         LocalDateTime createdAt = LocalDateTime.of(2024, 3, 14, 12, 0, 0);
@@ -60,7 +60,7 @@ class PlatformTest {
         String name = "PS5";
         LocalDateTime createdAt = LocalDateTime.of(2024, 3, 14, 12, 0, 0);
         String createdBy = "API";
-        Platform platform = new Platform(new PlatformId(), name, createdAt, createdBy, createdAt, createdBy, new Version(0));
+        Platform platform = new Platform(new PlatformId("01F9SNHD3GY8E0RNHDY1T5PMTV"), name, createdAt, createdBy, createdAt, createdBy, new Version(0));
         String updatedName = "Steam";
         LocalDateTime updatedAt = LocalDateTime.of(2024, 4, 14, 12, 0, 0);
         String updatedBy = "User";
