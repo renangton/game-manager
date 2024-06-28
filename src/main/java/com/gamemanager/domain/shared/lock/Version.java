@@ -1,7 +1,5 @@
 package com.gamemanager.domain.shared.lock;
 
-import java.util.Objects;
-
 public record Version(int value) {
 
     public static Version initial() {

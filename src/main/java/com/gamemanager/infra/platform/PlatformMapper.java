@@ -1,20 +1,20 @@
 package com.gamemanager.infra.platform;
 
-import com.gamemanager.domain.platform.Platform;
-import com.gamemanager.domain.platform.PlatformId;
+import com.gamemanager.domain.platform.PlatformDto;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface PlatformMapper {
-    List<Platform> selectAll();
+    List<PlatformDto> selectAll();
 
-    Optional<Platform> selectById(PlatformId platformId);
+    Optional<PlatformDto> selectById(String platformIdStr);
 
-    void insert(Platform platform);
+    void insert(String platformId, String name, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy, int version);
 
-    void update(Platform platform);
+    void update(String platformId, String name, LocalDateTime updatedAt, String updatedBy, int version);
 
-    void delete(PlatformId platformId);
+    void delete(String platformId);
 }

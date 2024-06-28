@@ -13,7 +13,8 @@ public class Platform implements OptimisticLockable {
     private String updatedBy;
     private final Version version;
 
-    public Platform(PlatformId platformId, String name, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy, Version version) {
+    public Platform(PlatformId platformId, String name, LocalDateTime createdAt, String createdBy,
+                    LocalDateTime updatedAt, String updatedBy, Version version) {
         this.platformId = platformId;
         this.name = name;
         this.createdAt = createdAt;
@@ -25,42 +26,44 @@ public class Platform implements OptimisticLockable {
 
     /**
      * プラットフォームを作成する
-     * @param name プラットフォーム名
+     *
+     * @param name      プラットフォーム名
      * @param createdBy プラットフォーム作成者
      * @return 新規作成されたプラットフォームオブジェクト
      */
     public static Platform create(String name, String createdBy) {
         PlatformId platformId = new PlatformId();
         LocalDateTime localDateTime = LocalDateTime.now();
-        return new Platform(
-                platformId,
+        return new Platform(platformId,
                 name,
                 localDateTime,
                 createdBy,
                 localDateTime,
                 createdBy,
-                Version.initial()
-        );
+                Version.initial());
     }
 
     /**
      * プラットフォームを再構築する
+     *
      * @param platformId プラットフォームID
-     * @param name プラットフォーム名
-     * @param createdAt プラットフォーム作成日
-     * @param createdBy プラットフォーム作成者
-     * @param updatedAt プラットフォーム更新日
-     * @param updatedBy プラットフォーム更新者
-     * @param version プラットフォームバージョン
+     * @param name       プラットフォーム名
+     * @param createdAt  プラットフォーム作成日
+     * @param createdBy  プラットフォーム作成者
+     * @param updatedAt  プラットフォーム更新日
+     * @param updatedBy  プラットフォーム更新者
+     * @param version    プラットフォームバージョン
      * @return 再構築されたプラットフォームオブジェクト
      */
-    public static Platform reconstruct(PlatformId platformId, String name, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy, Version version) {
+    public static Platform reconstruct(PlatformId platformId, String name, LocalDateTime createdAt, String createdBy,
+                                       LocalDateTime updatedAt, String updatedBy, Version version) {
         return new Platform(platformId, name, createdAt, createdBy, updatedAt, updatedBy, version);
     }
 
     /**
      * プラットフォームを更新する
-     * @param name プラットフォーム名
+     *
+     * @param name      プラットフォーム名
      * @param updatedAt プラットフォーム更新日
      * @param updatedBy プラットフォーム更新者
      */
