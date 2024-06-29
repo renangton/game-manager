@@ -10,10 +10,17 @@ public class PlatformId {
     }
 
     public PlatformId(String value) {
+        if (!isValidULID(value)) {
+            throw new IllegalArgumentException("Invalid ULID format");
+        }
         this.value = value;
     }
 
     public String getValue() {
         return value;
+    }
+
+    private boolean isValidULID(String ulid) {
+        return ulid != null && ulid.matches("^[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$");
     }
 }
