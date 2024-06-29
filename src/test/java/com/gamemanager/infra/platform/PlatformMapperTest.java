@@ -3,12 +3,17 @@ package com.gamemanager.infra.platform;
 import com.gamemanager.domain.platform.PlatformDto;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.spring.api.DBRider;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -19,6 +24,13 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 class PlatformMapperTest {
     @Autowired
     PlatformMapper platformMapper;
+
+    @Test
+    void testDatabaseConnection() throws Exception {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/game_list", "user", "example")) {
+            assertNotNull(connection);
+        }
+    }
 
     @Test
     @DataSet(value = "common/platformOnly.yaml")
@@ -83,10 +95,22 @@ class PlatformMapperTest {
     }
 
     @Test
-    @DataSet(value = "common/empty.yaml")
+    @DataSet(value = "common/platformOnly.yaml")
     void 指定したIDのプラットフォームが存在しない場合空のOptionalを取得すること() {
         // when
-        Optional<PlatformDto> actualPlatform = platformMapper.selectById("01F9SNHD3GY8E0RNHDY1T5PMTV");
+        Optional<PlatformDto> actualPlatform = platformMapper.selectById("00000000000000000000000000");
+
+        // then
+        assertEquals(actualPlatform, Optional.empty());
+    }
+
+    @ParameterizedTest
+    @CsvSource({"null", "''", "invalid-ulid", "123", "01F9SNHD3GY8E0RNHDY1T5PMT@"})
+    @DataSet(value = "common/platformOnly.yaml")
+    void IDに無効な形式のIDを指定した場合空のOptionalを取得すること(String testValue) {
+        // when
+        String actualValue = testValue.equals("null") ? null : testValue;
+        Optional<PlatformDto> actualPlatform = platformMapper.selectById(actualValue);
 
         // then
         assertEquals(actualPlatform, Optional.empty());

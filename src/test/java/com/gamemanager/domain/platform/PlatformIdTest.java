@@ -40,8 +40,9 @@ public class PlatformIdTest {
     })
     public void パラメータ付きコンストラクタは無効なULIDを渡されたとき例外をスローすること(String testValue, String expectedMessage) {
         // when
+        String actualValue = testValue.equals("null") ? null : testValue;
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            new PlatformId(testValue);
+            new PlatformId(actualValue);
         });
 
         // then
