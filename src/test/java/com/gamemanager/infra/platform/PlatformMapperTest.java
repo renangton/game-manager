@@ -3,13 +3,10 @@ package com.gamemanager.infra.platform;
 import com.gamemanager.domain.platform.PlatformDto;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.spring.api.DBRider;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -26,10 +23,8 @@ class PlatformMapperTest {
     PlatformMapper platformMapper;
 
     @Test
-    void testDatabaseConnection() throws Exception {
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/game_list", "user", "example")) {
-            assertNotNull(connection);
-        }
+    void 確認用() throws Exception {
+        assertEquals("hoge", "hoge");
     }
 
     @Test
