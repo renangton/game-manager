@@ -21,10 +21,6 @@ jobs:
           cache: 'gradle'
       - name: Docker Run
         run: docker-compose up -d
-      - name: Sleep for 120 seconds
-        uses: jakejarvis/wait-action@master
-        with:
-          time: '120s'
       - name: Test with Gradle
         run: ./gradlew test
       - name: Publish Test Report
