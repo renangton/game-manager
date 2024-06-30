@@ -23,7 +23,7 @@ class PlatformMapperTest {
     PlatformMapper platformMapper;
 
     @Test
-    void 確認用() throws Exception {
+    void 確認用() {
         assertEquals("hoge", "hoge");
     }
 
