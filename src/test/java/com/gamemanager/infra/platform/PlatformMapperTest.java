@@ -23,11 +23,6 @@ class PlatformMapperTest {
     PlatformMapper platformMapper;
 
     @Test
-    void 確認用() {
-        assertEquals("hoge", "hoge");
-    }
-
-    @Test
     @DataSet(value = "common/platformOnly.yaml")
     void プラットフォームを全件取得できること() {
         // when
