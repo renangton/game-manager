@@ -4,6 +4,7 @@ import com.gamemanager.domain.platform.Platform;
 import com.gamemanager.domain.platform.PlatformDto;
 import com.gamemanager.domain.platform.PlatformId;
 import com.gamemanager.domain.platform.PlatformRepository;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Repository;
@@ -49,9 +50,9 @@ public class PlatformRdbRepository implements PlatformRepository {
         platformMapper.insert(
                 platform.getPlatformId().getValue(),
                 platform.getName(),
-                platform.getCreatedAt(),
+                Timestamp.valueOf(platform.getCreatedAt()),
                 platform.getCreatedBy(),
-                platform.getUpdatedAt(),
+                Timestamp.valueOf(platform.getUpdatedAt()),
                 platform.getUpdatedBy(),
                 platform.getVersion().value()
         );
@@ -68,7 +69,7 @@ public class PlatformRdbRepository implements PlatformRepository {
         platformMapper.update(
                 platform.getPlatformId().getValue(),
                 platform.getName(),
-                platform.getUpdatedAt(),
+                Timestamp.valueOf(platform.getUpdatedAt()),
                 platform.getUpdatedBy(),
                 platform.getVersion().value()
         );

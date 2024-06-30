@@ -3,9 +3,8 @@ package com.gamemanager.infra.platform;
 import com.gamemanager.domain.platform.PlatformDto;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.spring.api.DBRider;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -115,9 +114,9 @@ class PlatformMapperTest {
         platformMapper.insert(
                 "01J1FM6SP9D5GG003QR0N5WD0K",
                 "3DS",
-                LocalDateTime.of(2024, 6, 8, 12, 30, 30),
+                Timestamp.valueOf(LocalDateTime.of(2024, 6, 8, 12, 30, 30)),
                 "API",
-                LocalDateTime.of(2024, 6, 8, 12, 30, 30),
+                Timestamp.valueOf(LocalDateTime.of(2024, 6, 8, 12, 30, 30)),
                 "API",
                 0
         );
@@ -145,7 +144,7 @@ class PlatformMapperTest {
         platformMapper.update(
                 "01F9SNHD3GY8E0RNHDY1T5PMTV",
                 "NEOGEO",
-                ZonedDateTime.of(2024, 6, 8, 12, 30, 30, 0, ZoneId.of("Asia/Tokyo")).toLocalDateTime(),
+                Timestamp.valueOf(LocalDateTime.of(2024, 6, 8, 12, 30, 30)),
                 "API2",
                 0
         );

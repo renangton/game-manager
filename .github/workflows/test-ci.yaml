@@ -22,7 +22,7 @@ jobs:
       - name: Docker Run
         run: docker-compose up -d
       - name: Test with Gradle
-        run: export JAVA_TOOL_OPTIONS="-Duser.timezone=Asia/Tokyo" | ./gradlew test
+        run: ./gradlew test -Duser.timezone=Asia/Tokyo
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v4
         if: always()
