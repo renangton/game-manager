@@ -115,9 +115,9 @@ class PlatformMapperTest {
         platformMapper.insert(
                 "01J1FM6SP9D5GG003QR0N5WD0K",
                 "3DS",
-                ZonedDateTime.of(2024, 6, 8, 12, 30, 30, 0, ZoneId.of("Asia/Tokyo")).toLocalDateTime(),
+                LocalDateTime.of(2024, 6, 8, 12, 30, 30),
                 "API",
-                ZonedDateTime.of(2024, 6, 8, 12, 30, 30, 0, ZoneId.of("Asia/Tokyo")).toLocalDateTime(),
+                LocalDateTime.of(2024, 6, 8, 12, 30, 30),
                 "API",
                 0
         );
