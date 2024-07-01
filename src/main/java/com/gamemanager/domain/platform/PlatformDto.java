@@ -65,45 +65,60 @@ public class PlatformDto {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         PlatformDto other = (PlatformDto) obj;
         if (platformId == null) {
             if (other.platformId != null)
                 return false;
-        } else if (!platformId.equals(other.platformId))
+        } else if (!platformId.equals(other.platformId)) {
             return false;
+        }
         if (name == null) {
-            if (other.name != null)
+            if (other.name != null) {
                 return false;
-        } else if (!name.equals(other.name))
+            }
+        } else if (!name.equals(other.name)) {
             return false;
+        }
         if (createdAt == null) {
-            if (other.createdAt != null)
+            if (other.createdAt != null) {
                 return false;
-        } else if (!createdAt.equals(other.createdAt))
+            }
+        } else if (!createdAt.equals(other.createdAt)) {
             return false;
+        }
         if (createdBy == null) {
-            if (other.createdBy != null)
+            if (other.createdBy != null) {
                 return false;
-        } else if (!createdBy.equals(other.createdBy))
+            }
+        } else if (!createdBy.equals(other.createdBy)) {
             return false;
+        }
         if (updatedAt == null) {
-            if (other.updatedAt != null)
+            if (other.updatedAt != null) {
                 return false;
-        } else if (!updatedAt.equals(other.updatedAt))
+            }
+        } else if (!updatedAt.equals(other.updatedAt)) {
             return false;
+        }
         if (updatedBy == null) {
-            if (other.updatedBy != null)
+            if (other.updatedBy != null) {
                 return false;
-        } else if (!updatedBy.equals(other.updatedBy))
+            }
+        } else if (!updatedBy.equals(other.updatedBy)) {
             return false;
-        if (version != other.version)
+        }
+        if (version != other.version) {
             return false;
+        }
         return true;
     }
 }
