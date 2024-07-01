@@ -1,0 +1,11 @@
+genres:
+games:
+platforms:
+  - id: "01J1FM6SP9D5GG003QR0N5WD0K"
+    platform_name: "3DS"
+    created_at: "2024-06-08 12:30:30"
+    created_by: "API"
+    updated_at: "2024-06-08 12:30:30"
+    updated_by: "API"
+    version: 0
+games_platforms:

@@ -2,8 +2,8 @@ package com.gamemanager.infra.platform;
 
 import com.gamemanager.domain.platform.PlatformDto;
 import com.github.database.rider.core.api.dataset.DataSet;
+import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.spring.api.DBRider;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -108,81 +108,78 @@ class PlatformMapperTest {
     }
 
     @Test
-    @DataSet
+    @DataSet(value = "common/empty.yaml")
+    @ExpectedDataSet(value = "platform/expectedInsertPlatform.yaml")
     void プラットフォームを登録できること() {
         // when
         platformMapper.insert(
                 "01J1FM6SP9D5GG003QR0N5WD0K",
                 "3DS",
-                Timestamp.valueOf(LocalDateTime.of(2024, 6, 8, 12, 30, 30)),
+                "2024-06-08 12:30:30",
                 "API",
-                Timestamp.valueOf(LocalDateTime.of(2024, 6, 8, 12, 30, 30)),
+                "2024-06-08 12:30:30",
                 "API",
                 0
         );
-        Optional<PlatformDto> actualPlatform = platformMapper.selectById("01J1FM6SP9D5GG003QR0N5WD0K");
-
-        // then
-        Optional<PlatformDto> expectedPlatform = Optional.of(
-                new PlatformDto(
-                        "01J1FM6SP9D5GG003QR0N5WD0K",
-                        "3DS",
-                        LocalDateTime.of(2024, 6, 8, 12, 30, 30),
-                        "API",
-                        LocalDateTime.of(2024, 6, 8, 12, 30, 30),
-                        "API",
-                        0
-                )
-        );
-        assertEquals(actualPlatform, expectedPlatform);
     }
 
     @Test
     @DataSet(value = "common/platformOnly.yaml")
+    @ExpectedDataSet(value = "platform/expectedUpdatePlatform.yaml")
     void プラットフォームを更新できること() {
         // when
         platformMapper.update(
                 "01F9SNHD3GY8E0RNHDY1T5PMTV",
                 "NEOGEO",
-                Timestamp.valueOf(LocalDateTime.of(2024, 6, 8, 12, 30, 30)),
+                "2024-06-08 12:30:30",
                 "API2",
                 0
         );
-        Optional<PlatformDto> actualPlatform = platformMapper.selectById("01F9SNHD3GY8E0RNHDY1T5PMTV");
-
-        // then
-        Optional<PlatformDto> expectedPlatform = Optional.of(
-                new PlatformDto(
-                        "01F9SNHD3GY8E0RNHDY1T5PMTV",
-                        "NEOGEO",
-                        LocalDateTime.of(2024, 3, 8, 12, 30, 30),
-                        "API",
-                        LocalDateTime.of(2024, 6, 8, 12, 30, 30),
-                        "API2",
-                        1
-                )
-        );
-        assertEquals(actualPlatform, expectedPlatform);
+        LocalDateTime time = LocalDateTime.now();
+        System.out.println(time.toString());
     }
 
     @Test
     @DataSet(value = "common/platformOnly.yaml")
+    @ExpectedDataSet(value = "common/platformOnly.yaml")
+    void 指定したIDのプラットフォームが存在しない場合更新されないこと() {
+        // when
+        platformMapper.update(
+                "NONESNHD3GY8E0RNHDY1T5PMTV",
+                "NEOGEO",
+                "2024-06-08 12:30:30",
+                "API2",
+                0
+        );
+    }
+
+    @Test
+    @DataSet(value = "common/platformOnly.yaml")
+    @ExpectedDataSet(value = "common/platformOnly.yaml")
+    void 指定したIDのプラットフォームのバージョンが一致しない場合更新されないこと() {
+        // when
+        platformMapper.update(
+                "NONESNHD3GY8E0RNHDY1T5PMTV",
+                "NEOGEO",
+                "2024-06-08 12:30:30",
+                "API2",
+                1
+        );
+    }
+
+    @Test
+    @DataSet(value = "common/platformOnly.yaml")
+    @ExpectedDataSet(value = "platform/expectedDeletePlatform.yaml")
     void プラットフォームを削除できること() {
         // when
         platformMapper.delete("01F9SNHD3GY8E0RNHDY1T5PMTV");
-        List<PlatformDto> actualPlatformList = platformMapper.selectAll();
+    }
 
-        // then
-        PlatformDto platformDto = new PlatformDto(
-                "01F9SNHD3H63J5NW9KYK56QZ0Y",
-                "PS5",
-                LocalDateTime.of(2024, 3, 8, 12, 30, 30),
-                "API",
-                LocalDateTime.of(2024, 3, 8, 12, 30, 30),
-                "API",
-                0
-        );
-        List<PlatformDto> expectedPlatformList = Arrays.asList(platformDto);
-        assertEquals(actualPlatformList, expectedPlatformList);
+    @Test
+    @DataSet(value = "common/platformOnly.yaml")
+    @ExpectedDataSet(value = "common/platformOnly.yaml")
+    void 指定したIDのプラットフォームが存在しない場合削除されないこと() {
+        // when
+        platformMapper.delete("NONESNHD3GY8E0RNHDY1T5PMTV");
     }
 }

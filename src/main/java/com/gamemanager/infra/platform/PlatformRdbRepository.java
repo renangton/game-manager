@@ -4,7 +4,7 @@ import com.gamemanager.domain.platform.Platform;
 import com.gamemanager.domain.platform.PlatformDto;
 import com.gamemanager.domain.platform.PlatformId;
 import com.gamemanager.domain.platform.PlatformRepository;
-import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Repository;
@@ -16,6 +16,8 @@ public class PlatformRdbRepository implements PlatformRepository {
     public PlatformRdbRepository(PlatformMapper platformMapper) {
         this.platformMapper = platformMapper;
     }
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     /**
      * プラットフォームを全件取得する
@@ -50,9 +52,9 @@ public class PlatformRdbRepository implements PlatformRepository {
         platformMapper.insert(
                 platform.getPlatformId().getValue(),
                 platform.getName(),
-                Timestamp.valueOf(platform.getCreatedAt()),
+                platform.getCreatedAt().format(formatter),
                 platform.getCreatedBy(),
-                Timestamp.valueOf(platform.getUpdatedAt()),
+                platform.getUpdatedAt().format(formatter),
                 platform.getUpdatedBy(),
                 platform.getVersion().value()
         );
@@ -69,7 +71,7 @@ public class PlatformRdbRepository implements PlatformRepository {
         platformMapper.update(
                 platform.getPlatformId().getValue(),
                 platform.getName(),
-                Timestamp.valueOf(platform.getUpdatedAt()),
+                platform.getUpdatedAt().format(formatter),
                 platform.getUpdatedBy(),
                 platform.getVersion().value()
         );
