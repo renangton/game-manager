@@ -76,8 +76,9 @@ public class PlatformDto {
         }
         PlatformDto other = (PlatformDto) obj;
         if (platformId == null) {
-            if (other.platformId != null)
+            if (other.platformId != null) {
                 return false;
+            }
         } else if (!platformId.equals(other.platformId)) {
             return false;
         }
