@@ -4,6 +4,7 @@ import com.gamemanager.domain.platform.PlatformDto;
 import java.util.List;
 import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface PlatformMapper {
@@ -11,9 +12,23 @@ public interface PlatformMapper {
 
     Optional<PlatformDto> selectById(String platformIdStr);
 
-    void insert(String platformId, String name, String createdAt, String createdBy, String updatedAt, String updatedBy, int version);
+    void insert(
+            @Param("platformId") String platformId,
+            @Param("name") String name,
+            @Param("createdAt") String createdAt,
+            @Param("createdBy") String createdBy,
+            @Param("updatedAt") String updatedAt,
+            @Param("updatedBy") String updatedBy,
+            @Param("version") int version
+    );
 
-    void update(String platformId, String name, String updatedAt, String updatedBy, int version);
+    void update(
+            @Param("platformId") String platformId,
+            @Param("name") String name,
+            @Param("updatedAt") String updatedAt,
+            @Param("updatedBy") String updatedBy,
+            @Param("version") int version
+    );
 
     void delete(String platformId);
 }
