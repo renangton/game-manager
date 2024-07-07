@@ -59,7 +59,7 @@ class PlatformMapperTest {
         List<PlatformDto> actualPlatformList = platformMapper.selectAll();
 
         // then
-        List<PlatformDto> expectedPlatformList = Arrays.asList();
+        List<PlatformDto> expectedPlatformList = List.of();
         assertEquals(actualPlatformList, expectedPlatformList);
     }
 
@@ -115,9 +115,9 @@ class PlatformMapperTest {
         platformMapper.insert(
                 "01J1FM6SP9D5GG003QR0N5WD0K",
                 "3DS",
-                "2024-06-08 12:30:30",
+                LocalDateTime.of(2024, 6, 8, 12, 30, 30),
                 "API",
-                "2024-06-08 12:30:30",
+                LocalDateTime.of(2024, 6, 8, 12, 30, 30),
                 "API",
                 0
         );
@@ -131,12 +131,10 @@ class PlatformMapperTest {
         platformMapper.update(
                 "01F9SNHD3GY8E0RNHDY1T5PMTV",
                 "NEOGEO",
-                "2024-06-08 12:30:30",
+                LocalDateTime.of(2024, 6, 8, 12, 30, 30),
                 "API2",
                 0
         );
-        LocalDateTime time = LocalDateTime.now();
-        System.out.println(time.toString());
     }
 
     @Test
@@ -147,7 +145,7 @@ class PlatformMapperTest {
         platformMapper.update(
                 "NONESNHD3GY8E0RNHDY1T5PMTV",
                 "NEOGEO",
-                "2024-06-08 12:30:30",
+                LocalDateTime.of(2024, 6, 8, 12, 30, 30),
                 "API2",
                 0
         );
@@ -161,7 +159,7 @@ class PlatformMapperTest {
         platformMapper.update(
                 "NONESNHD3GY8E0RNHDY1T5PMTV",
                 "NEOGEO",
-                "2024-06-08 12:30:30",
+                LocalDateTime.of(2024, 6, 8, 12, 30, 30),
                 "API2",
                 1
         );

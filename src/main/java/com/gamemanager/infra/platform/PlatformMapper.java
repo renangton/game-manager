@@ -1,6 +1,7 @@
 package com.gamemanager.infra.platform;
 
 import com.gamemanager.domain.platform.PlatformDto;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
@@ -15,9 +16,9 @@ public interface PlatformMapper {
     void insert(
             @Param("platformId") String platformId,
             @Param("name") String name,
-            @Param("createdAt") String createdAt,
+            @Param("createdAt") LocalDateTime createdAt,
             @Param("createdBy") String createdBy,
-            @Param("updatedAt") String updatedAt,
+            @Param("updatedAt") LocalDateTime updatedAt,
             @Param("updatedBy") String updatedBy,
             @Param("version") int version
     );
@@ -25,7 +26,7 @@ public interface PlatformMapper {
     void update(
             @Param("platformId") String platformId,
             @Param("name") String name,
-            @Param("updatedAt") String updatedAt,
+            @Param("updatedAt") LocalDateTime updatedAt,
             @Param("updatedBy") String updatedBy,
             @Param("version") int version
     );
