@@ -1,24 +1,148 @@
 package com.gamemanager.infra.platform;
 
-import com.gamemanager.domain.platform.PlatformRepository;
-import com.github.database.rider.spring.api.DBRider;
-import org.junit.jupiter.api.extension.ExtendWith;
+import com.gamemanager.domain.platform.Platform;
+import com.gamemanager.domain.platform.PlatformDto;
+import com.gamemanager.domain.platform.PlatformId;
+import com.gamemanager.domain.shared.lock.Version;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
-@DBRider
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ExtendWith(SpringExtension.class)
 @SpringBootTest
 class PlatformRdbRepositoryTest {
-    private final PlatformRepository platformRepository;
+    @MockBean(name = "platformMapper")
+    private PlatformMapper platformMapper;
 
     @Autowired
-    PlatformRdbRepositoryTest(PlatformRepository platformRepository) {
-        this.platformRepository = platformRepository;
+    private PlatformRdbRepository platformRdbRepository;
+
+    @Test
+    void プラットフォームを全件取得できること() {
+        // given
+        PlatformDto platform1 = new PlatformDto(
+                "01F9SNHD3GY8E0RNHDY1T5PMTV",
+                "PS4",
+                LocalDateTime.of(2024, 3, 8, 12, 30, 30),
+                "API",
+                LocalDateTime.of(2024, 3, 8, 12, 30, 30), "API",
+                0
+        );
+        PlatformDto platform2 = new PlatformDto(
+                "01F9SNHD3H63J5NW9KYK56QZ0Y", "PS5",
+                LocalDateTime.of(2024, 3, 8, 12, 30, 30),
+                "API",
+                LocalDateTime.of(2024, 3, 8, 12, 30, 30),
+                "API",
+                0
+        );
+        List<PlatformDto> platformList = Arrays.asList(platform1, platform2);
+        when(platformMapper.selectAll()).thenReturn(platformList);
+
+        // when
+        List<PlatformDto> actualPlatformList = platformRdbRepository.findAll();
+
+        // then
+        assertEquals(platformList, actualPlatformList);
+        verify(platformMapper, times(1)).selectAll();
     }
 
-    // 実装予定
+    @Test
+    void プラットフォームを1件取得できること() {
+        // given
+        String platformIdValue = "01F9SNHD3GY8E0RNHDY1T5PMTV";
+        PlatformId platformId = new PlatformId(platformIdValue);
+        PlatformDto expectedPlatform = new PlatformDto(platformIdValue, "PS4",
+                LocalDateTime.of(2024, 3, 8, 12, 30, 30), "API",
+                LocalDateTime.of(2024, 3, 8, 12, 30, 30), "API", 0);
+        when(platformMapper.selectById(platformIdValue)).thenReturn(Optional.of(expectedPlatform));
+
+        // when
+        Optional<PlatformDto> actualPlatform = platformRdbRepository.findById(platformId);
+
+        // then
+        assertEquals(Optional.of(expectedPlatform), actualPlatform);
+        verify(platformMapper, times(1)).selectById(platformIdValue);
+    }
+
+    @Test
+    void 指定したIDのプラットフォームが存在しない場合空のOptionalを取得すること() {
+        // given
+        String platformIdValue = "01F9SNHD3GY8E0RNHDY1T5PMTV";
+        PlatformId platformId = new PlatformId(platformIdValue);
+        when(platformMapper.selectById(platformIdValue)).thenReturn(Optional.empty());
+
+        // when
+        Optional<PlatformDto> actualPlatform = platformRdbRepository.findById(platformId);
+
+        // then
+        assertEquals(Optional.empty(), actualPlatform);
+        verify(platformMapper, times(1)).selectById(platformIdValue);
+    }
+
+    @Test
+    void プラットフォームを保存できること() {
+        // given
+        PlatformId platformId = new PlatformId("01J1FM6SP9D5GG003QR0N5WD0K");
+        LocalDateTime time = LocalDateTime.of(2024, 6, 8, 12, 30, 30);
+        Platform platform = new Platform(platformId, "3DS", time, "API", time, "API", new Version(0));
+        doNothing().when(platformMapper).insert(platformId.getValue(), "3DS", time, "API", time, "API", 0);
+
+        // when
+        platformRdbRepository.save(platform);
+
+        // then
+        verify(platformMapper, times(1)).insert(
+                platformId.getValue(),
+                "3DS",
+                time,
+                "API",
+                time,
+                "API",
+                0
+        );
+    }
+
+    @Test
+    void プラットフォームを更新できること() {
+        // given
+        PlatformId platformId = new PlatformId("01F9SNHD3GY8E0RNHDY1T5PMTV");
+        LocalDateTime time = LocalDateTime.of(2024, 6, 8, 12, 30, 30);
+        Platform platform = new Platform(platformId, "NEOGEO", time, "API", time, "API2", new Version(0));
+        doNothing().when(platformMapper).update(platformId.getValue(), "NEOGEO", time, "API", 0);
+
+        // when
+        platformRdbRepository.update(platform);
+
+        // then
+        verify(platformMapper, times(1)).update(
+                platformId.getValue(),
+                "NEOGEO",
+                time,
+                "API2",
+                0
+        );
+    }
+
+    @Test
+    void プラットフォームを削除できること() {
+        // given
+        PlatformId platformId = new PlatformId("01F9SNHD3GY8E0RNHDY1T5PMTV");
+        doNothing().when(platformMapper).delete(platformId.getValue());
+
+        // when
+        platformRdbRepository.delete(platformId);
+
+        // then
+        verify(platformMapper, times(1)).delete(platformId.getValue());
+    }
 }
