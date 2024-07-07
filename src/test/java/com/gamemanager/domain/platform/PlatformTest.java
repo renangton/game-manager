@@ -57,10 +57,15 @@ class PlatformTest {
     @Test
     public void プラットフォームが指定の属性に更新されること() {
         // when
-        String name = "PS5";
-        LocalDateTime createdAt = LocalDateTime.of(2024, 3, 14, 12, 0, 0);
-        String createdBy = "API";
-        Platform platform = new Platform(new PlatformId("01F9SNHD3GY8E0RNHDY1T5PMTV"), name, createdAt, createdBy, createdAt, createdBy, new Version(0));
+        Platform platform = new Platform(
+                new PlatformId("01F9SNHD3GY8E0RNHDY1T5PMTV"),
+                "PS5",
+                LocalDateTime.of(2024, 3, 14, 12, 0, 0),
+                "API",
+                LocalDateTime.of(2024, 3, 14, 12, 0, 0),
+                "API",
+                new Version(0)
+        );
         String updatedName = "Steam";
         LocalDateTime updatedAt = LocalDateTime.of(2024, 4, 14, 12, 0, 0);
         String updatedBy = "User";
