@@ -9,7 +9,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 public class PlatformIdTest {
-
     @Test
     public void デフォルトコンストラクタはnullおよび空文字以外を生成すること() {
         // when
