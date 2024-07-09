@@ -30,6 +30,9 @@ class PlatformTest {
         assertEquals(localDateTime, platform.getUpdatedAt());
         assertEquals(createdBy, platform.getUpdatedBy());
         assertEquals(new Version(0), platform.getVersion());
+
+        mockedLocalDateTime.close();
+        mockedVersion.close();
     }
 
     @Test

@@ -8,23 +8,31 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class PlatformRdbRepositoryTest {
-    @MockBean(name = "platformMapper")
+    @Mock
     private PlatformMapper platformMapper;
 
-    @Autowired
+    @InjectMocks
     private PlatformRdbRepository platformRdbRepository;
+
+    @AfterEach
+    void resetMock() {
+        reset(platformMapper);
+    }
 
     @Test
     void プラットフォームを全件取得できること() {
@@ -34,7 +42,8 @@ class PlatformRdbRepositoryTest {
                 "PS4",
                 LocalDateTime.of(2024, 3, 8, 12, 30, 30),
                 "API",
-                LocalDateTime.of(2024, 3, 8, 12, 30, 30), "API",
+                LocalDateTime.of(2024, 3, 8, 12, 30, 30),
+                "API",
                 0
         );
         PlatformDto platform2 = new PlatformDto(
@@ -62,8 +71,12 @@ class PlatformRdbRepositoryTest {
         String platformIdValue = "01F9SNHD3GY8E0RNHDY1T5PMTV";
         PlatformId platformId = new PlatformId(platformIdValue);
         PlatformDto expectedPlatform = new PlatformDto(platformIdValue, "PS4",
-                LocalDateTime.of(2024, 3, 8, 12, 30, 30), "API",
-                LocalDateTime.of(2024, 3, 8, 12, 30, 30), "API", 0);
+                LocalDateTime.of(2024, 3, 8, 12, 30, 30),
+                "API",
+                LocalDateTime.of(2024, 3, 8, 12, 30, 30),
+                "API",
+                0
+        );
         when(platformMapper.selectById(platformIdValue)).thenReturn(Optional.of(expectedPlatform));
 
         // when
@@ -93,9 +106,24 @@ class PlatformRdbRepositoryTest {
     void プラットフォームを保存できること() {
         // given
         PlatformId platformId = new PlatformId("01J1FM6SP9D5GG003QR0N5WD0K");
-        LocalDateTime time = LocalDateTime.of(2024, 6, 8, 12, 30, 30);
-        Platform platform = new Platform(platformId, "3DS", time, "API", time, "API", new Version(0));
-        doNothing().when(platformMapper).insert(platformId.getValue(), "3DS", time, "API", time, "API", 0);
+        Platform platform = new Platform(
+                platformId,
+                "3DS",
+                LocalDateTime.of(2024, 6, 8, 12, 30, 30),
+                "API",
+                LocalDateTime.of(2024, 6, 8, 12, 30, 30),
+                "API",
+                new Version(0)
+        );
+        doNothing().when(platformMapper).insert(
+                platformId.getValue(),
+                "3DS",
+                LocalDateTime.of(2024, 6, 8, 12, 30, 30),
+                "API",
+                LocalDateTime.of(2024, 6, 8, 12, 30, 30),
+                "API",
+                0
+        );
 
         // when
         platformRdbRepository.save(platform);
@@ -104,9 +132,9 @@ class PlatformRdbRepositoryTest {
         verify(platformMapper, times(1)).insert(
                 platformId.getValue(),
                 "3DS",
-                time,
+                LocalDateTime.of(2024, 6, 8, 12, 30, 30),
                 "API",
-                time,
+                LocalDateTime.of(2024, 6, 8, 12, 30, 30),
                 "API",
                 0
         );
@@ -116,9 +144,22 @@ class PlatformRdbRepositoryTest {
     void プラットフォームを更新できること() {
         // given
         PlatformId platformId = new PlatformId("01F9SNHD3GY8E0RNHDY1T5PMTV");
-        LocalDateTime time = LocalDateTime.of(2024, 6, 8, 12, 30, 30);
-        Platform platform = new Platform(platformId, "NEOGEO", time, "API", time, "API2", new Version(0));
-        doNothing().when(platformMapper).update(platformId.getValue(), "NEOGEO", time, "API", 0);
+        Platform platform = new Platform(
+                platformId,
+                "NEOGEO",
+                LocalDateTime.of(2024, 6, 8, 12, 30, 30),
+                "API",
+                LocalDateTime.of(2024, 6, 8, 12, 30, 30),
+                "API2",
+                new Version(0)
+        );
+        doNothing().when(platformMapper).update(
+                platformId.getValue(),
+                "NEOGEO",
+                LocalDateTime.of(2024, 6, 8, 12, 30, 30),
+                "API2",
+                0
+        );
 
         // when
         platformRdbRepository.update(platform);
@@ -127,7 +168,7 @@ class PlatformRdbRepositoryTest {
         verify(platformMapper, times(1)).update(
                 platformId.getValue(),
                 "NEOGEO",
-                time,
+                LocalDateTime.of(2024, 6, 8, 12, 30, 30),
                 "API2",
                 0
         );

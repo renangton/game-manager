@@ -45,7 +45,6 @@ public class PlatformRdbRepository implements PlatformRepository {
      */
     @Override
     public void save(Platform platform) {
-
         platformMapper.insert(
                 platform.getPlatformId().getValue(),
                 platform.getName(),
