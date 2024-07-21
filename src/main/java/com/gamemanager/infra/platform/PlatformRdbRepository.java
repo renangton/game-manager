@@ -33,8 +33,8 @@ public class PlatformRdbRepository implements PlatformRepository {
      * @return Optionalにラップされた1件のプラットフォーム、存在しない場合は空のOptional
      */
     @Override
-    public Optional<PlatformDto> findById(PlatformId platformId) {
-        return platformMapper.selectById(platformId.getValue());
+    public Optional<PlatformDto> findById(String platformId) {
+        return platformMapper.selectById(platformId);
     }
 
     /**

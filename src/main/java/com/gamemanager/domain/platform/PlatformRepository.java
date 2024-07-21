@@ -6,7 +6,7 @@ import java.util.Optional;
 public interface PlatformRepository {
     List<PlatformDto> findAll();
 
-    Optional<PlatformDto> findById(PlatformId platformId);
+    Optional<PlatformDto> findById(String platformId);
 
     void save(Platform platform);
 

@@ -68,38 +68,36 @@ class PlatformRdbRepositoryTest {
     @Test
     void プラットフォームを1件取得できること() {
         // given
-        String platformIdValue = "01F9SNHD3GY8E0RNHDY1T5PMTV";
-        PlatformId platformId = new PlatformId(platformIdValue);
-        PlatformDto expectedPlatform = new PlatformDto(platformIdValue, "PS4",
+        String platformId = "01F9SNHD3GY8E0RNHDY1T5PMTV";
+        PlatformDto expectedPlatform = new PlatformDto(platformId, "PS4",
                 LocalDateTime.of(2024, 3, 8, 12, 30, 30),
                 "API",
                 LocalDateTime.of(2024, 3, 8, 12, 30, 30),
                 "API",
                 0
         );
-        when(platformMapper.selectById(platformIdValue)).thenReturn(Optional.of(expectedPlatform));
+        when(platformMapper.selectById(platformId)).thenReturn(Optional.of(expectedPlatform));
 
         // when
         Optional<PlatformDto> actualPlatform = platformRdbRepository.findById(platformId);
 
         // then
         assertEquals(Optional.of(expectedPlatform), actualPlatform);
-        verify(platformMapper, times(1)).selectById(platformIdValue);
+        verify(platformMapper, times(1)).selectById(platformId);
     }
 
     @Test
     void 指定したIDのプラットフォームが存在しない場合空のOptionalを取得すること() {
         // given
-        String platformIdValue = "01F9SNHD3GY8E0RNHDY1T5PMTV";
-        PlatformId platformId = new PlatformId(platformIdValue);
-        when(platformMapper.selectById(platformIdValue)).thenReturn(Optional.empty());
+        String platformId = "01F9SNHD3GY8E0RNHDY1T5PMTV";
+        when(platformMapper.selectById(platformId)).thenReturn(Optional.empty());
 
         // when
         Optional<PlatformDto> actualPlatform = platformRdbRepository.findById(platformId);
 
         // then
         assertEquals(Optional.empty(), actualPlatform);
-        verify(platformMapper, times(1)).selectById(platformIdValue);
+        verify(platformMapper, times(1)).selectById(platformId);
     }
 
     @Test
