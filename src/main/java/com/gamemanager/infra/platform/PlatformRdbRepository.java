@@ -2,7 +2,6 @@ package com.gamemanager.infra.platform;
 
 import com.gamemanager.domain.platform.Platform;
 import com.gamemanager.domain.platform.PlatformDto;
-import com.gamemanager.domain.platform.PlatformId;
 import com.gamemanager.domain.platform.PlatformRepository;
 import java.util.List;
 import java.util.Optional;
@@ -80,7 +79,7 @@ public class PlatformRdbRepository implements PlatformRepository {
      * @return なし
      */
     @Override
-    public void delete(PlatformId platformId) {
-        platformMapper.delete(platformId.getValue());
+    public void delete(String platformId) {
+        platformMapper.delete(platformId);
     }
 }

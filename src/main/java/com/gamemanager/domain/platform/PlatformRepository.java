@@ -12,5 +12,5 @@ public interface PlatformRepository {
 
     void update(Platform platform);
 
-    void delete(PlatformId platformId);
+    void delete(String platformId);
 }
