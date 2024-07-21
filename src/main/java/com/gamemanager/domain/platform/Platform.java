@@ -34,7 +34,8 @@ public class Platform implements OptimisticLockable {
     public static Platform create(String name, String createdBy) {
         PlatformId platformId = new PlatformId();
         LocalDateTime localDateTime = LocalDateTime.now();
-        return new Platform(platformId,
+        return new Platform(
+                platformId,
                 name,
                 localDateTime,
                 createdBy,
