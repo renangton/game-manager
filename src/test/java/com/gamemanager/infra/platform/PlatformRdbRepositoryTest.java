@@ -175,13 +175,13 @@ class PlatformRdbRepositoryTest {
     @Test
     void プラットフォームを削除できること() {
         // given
-        PlatformId platformId = new PlatformId("01F9SNHD3GY8E0RNHDY1T5PMTV");
-        doNothing().when(platformMapper).delete(platformId.getValue());
+        String platformId = "01F9SNHD3GY8E0RNHDY1T5PMTV";
+        doNothing().when(platformMapper).delete(platformId);
 
         // when
         platformRdbRepository.delete(platformId);
 
         // then
-        verify(platformMapper, times(1)).delete(platformId.getValue());
+        verify(platformMapper, times(1)).delete(platformId);
     }
 }
