@@ -8,14 +8,12 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -28,11 +26,6 @@ class PlatformRdbRepositoryTest {
 
     @InjectMocks
     private PlatformRdbRepository platformRdbRepository;
-
-    @AfterEach
-    void resetMock() {
-        reset(platformMapper);
-    }
 
     @Test
     void プラットフォームを全件取得できること() {
@@ -47,7 +40,8 @@ class PlatformRdbRepositoryTest {
                 0
         );
         PlatformDto platform2 = new PlatformDto(
-                "01F9SNHD3H63J5NW9KYK56QZ0Y", "PS5",
+                "01F9SNHD3H63J5NW9KYK56QZ0Y",
+                "PS5",
                 LocalDateTime.of(2024, 3, 8, 12, 30, 30),
                 "API",
                 LocalDateTime.of(2024, 3, 8, 12, 30, 30),
@@ -69,7 +63,8 @@ class PlatformRdbRepositoryTest {
     void プラットフォームを1件取得できること() {
         // given
         String platformId = "01F9SNHD3GY8E0RNHDY1T5PMTV";
-        PlatformDto expectedPlatform = new PlatformDto(platformId, "PS4",
+        PlatformDto expectedPlatform = new PlatformDto(platformId,
+                "PS4",
                 LocalDateTime.of(2024, 3, 8, 12, 30, 30),
                 "API",
                 LocalDateTime.of(2024, 3, 8, 12, 30, 30),
