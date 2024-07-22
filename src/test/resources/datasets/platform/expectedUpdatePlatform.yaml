@@ -1,0 +1,18 @@
+genres:
+games:
+platforms:
+  - id: "01F9SNHD3GY8E0RNHDY1T5PMTV"
+    platform_name: "NEOGEO"
+    created_at: "2024-03-08 12:30:30"
+    created_by: "API"
+    updated_at: "2024-06-08 12:30:30"
+    updated_by: "API2"
+    version: 1
+  - id: "01F9SNHD3H63J5NW9KYK56QZ0Y"
+    platform_name: "PS5"
+    created_at: "2024-03-08 12:30:30"
+    created_by: "API"
+    updated_at: "2024-03-08 12:30:30"
+    updated_by: "API"
+    version: 0
+games_platforms:

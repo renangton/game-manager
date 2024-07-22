@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gamemanager.infra.platform.PlatformMapper">
+
+    <resultMap type="com.gamemanager.domain.platform.PlatformDto" id="platform">
+        <id property="platformId" column="id"/>
+        <result property="name" column="platform_name"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="createdBy" column="created_by"/>
+        <result property="updatedAt" column="updated_at"/>
+        <result property="updatedBy" column="updated_by"/>
+        <result property="version" column="version"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="platform">
+        SELECT *
+        FROM platforms
+    </select>
+
+    <select id="selectById" resultMap="platform">
+        SELECT *
+        FROM platforms
+        WHERE id = #{platformId}
+   </select>
+
+    <insert id="insert">
+        INSERT INTO platforms (id, platform_name, created_at, created_by, updated_at, updated_by, version)
+        VALUES (#{platformId}, #{name}, #{createdAt}, #{createdBy}, #{updatedAt}, #{updatedBy}, #{version})
+    </insert>
+
+    <update id="update">
+        UPDATE platforms
+        SET platform_name = #{name},
+           updated_at = #{updatedAt},
+           updated_by = #{updatedBy},
+           version = version + 1
+        WHERE id = #{platformId} AND version = #{version}
+   </update>
+
+    <delete id="delete">
+        DELETE
+        FROM platforms
+        WHERE id = #{platformId}
+   </delete>
+</mapper>
