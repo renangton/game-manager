@@ -3,6 +3,7 @@ package com.gamemanager.domain.platform;
 import com.gamemanager.domain.shared.lock.OptimisticLockable;
 import com.gamemanager.domain.shared.lock.Version;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Platform implements OptimisticLockable {
     private final PlatformId platformId;
@@ -101,5 +102,30 @@ public class Platform implements OptimisticLockable {
     @Override
     public Version getVersion() {
         return version;
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Platform platform = (Platform) o;
+        return Objects.equals(
+                getPlatformId(), platform.getPlatformId())
+                && Objects.equals(getName(), platform.getName())
+                && Objects.equals(getCreatedAt(), platform.getCreatedAt())
+                && Objects.equals(getCreatedBy(), platform.getCreatedBy())
+                && Objects.equals(getUpdatedAt(), platform.getUpdatedAt())
+                && Objects.equals(getUpdatedBy(), platform.getUpdatedBy())
+                && Objects.equals(getVersion(), platform.getVersion()
+        );
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getPlatformId(), getName(), getCreatedAt(), getCreatedBy(), getUpdatedAt(), getUpdatedBy(), getVersion());
     }
 }
